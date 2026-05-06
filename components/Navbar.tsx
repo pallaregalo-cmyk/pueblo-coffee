@@ -18,7 +18,13 @@ const navLinks = [
   },
   { label: "Ekipman", href: "/ekipman" },
   { label: "Cafeler", href: "/cafeler" },
-  { label: "Toptan", href: "/toptan" },
+  {
+    label: "Toptan Alım",
+    href: "/toptan",
+    sub: [
+      { label: "Bayi Girişi", href: "https://bayi.oanddcoffee.com", external: true },
+    ],
+  },
 ];
 
 export default function Navbar() {
@@ -77,15 +83,27 @@ export default function Navbar() {
                 {link.sub && openSub === link.label && (
                   <div className="absolute top-full left-0 pt-4 min-w-[180px]">
                     <div className="bg-bg-soft border border-stone/10 py-2">
-                      {link.sub.map((s) => (
-                        <Link
-                          key={s.label}
-                          href={s.href}
-                          className="block px-5 py-2.5 label-mono text-[9px] text-stone/60 hover:text-gold hover:bg-bg-surface transition-all duration-150"
-                        >
-                          {s.label}
-                        </Link>
-                      ))}
+                      {link.sub.map((s) =>
+                        (s as any).external ? (
+                          <a
+                            key={s.label}
+                            href={s.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block px-5 py-2.5 label-mono text-[9px] text-stone/60 hover:text-gold hover:bg-bg-surface transition-all duration-150"
+                          >
+                            {s.label}
+                          </a>
+                        ) : (
+                          <Link
+                            key={s.label}
+                            href={s.href}
+                            className="block px-5 py-2.5 label-mono text-[9px] text-stone/60 hover:text-gold hover:bg-bg-surface transition-all duration-150"
+                          >
+                            {s.label}
+                          </Link>
+                        )
+                      )}
                     </div>
                   </div>
                 )}
@@ -143,16 +161,29 @@ export default function Navbar() {
               </Link>
               {link.sub && (
                 <div className="pl-4 pb-2">
-                  {link.sub.map((s) => (
-                    <Link
-                      key={s.label}
-                      href={s.href}
-                      className="block py-2 label-mono text-[10px] text-stone/50 hover:text-gold transition-colors"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {s.label}
-                    </Link>
-                  ))}
+                  {link.sub.map((s) =>
+                    (s as any).external ? (
+                      <a
+                        key={s.label}
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block py-2 label-mono text-[10px] text-stone/50 hover:text-gold transition-colors"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {s.label}
+                      </a>
+                    ) : (
+                      <Link
+                        key={s.label}
+                        href={s.href}
+                        className="block py-2 label-mono text-[10px] text-stone/50 hover:text-gold transition-colors"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {s.label}
+                      </Link>
+                    )
+                  )}
                 </div>
               )}
             </div>
