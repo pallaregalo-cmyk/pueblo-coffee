@@ -1,5 +1,8 @@
+'use client'
+
 import Link from "next/link";
-import { Instagram, Facebook } from "lucide-react";
+import { Instagram, Facebook, ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 const links = {
   Keşfet: [
@@ -9,8 +12,6 @@ const links = {
     { label: "Cafeler", href: "/cafeler" },
   ],
   Kurumsal: [
-    { label: "Toptan Alım", href: "/toptan" },
-    { label: "Bayi Girişi", href: "https://bayi.pueblocoffee.com.tr" },
     { label: "Kariyer", href: "/kariyer" },
     { label: "İletişim", href: "/iletisim" },
   ],
@@ -23,6 +24,8 @@ const links = {
 };
 
 export default function Footer() {
+  const [topOpen, setTopOpen] = useState(false);
+
   return (
     <footer className="bg-bg-soft border-t border-stone/10">
       <div className="section-padding py-20">
@@ -61,24 +64,84 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Nav columns */}
-          {Object.entries(links).map(([group, items]) => (
-            <div key={group}>
-              <p className="label-mono text-[9px] text-stone/30 mb-5">{group}</p>
-              <ul className="flex flex-col gap-3">
-                {items.map((item) => (
-                  <li key={item.label}>
-                    <Link
-                      href={item.href}
-                      className="text-stone/50 hover:text-gold text-sm font-light transition-colors duration-200"
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Keşfet */}
+          <div>
+            <p className="label-mono text-[9px] text-stone/30 mb-5">Keşfet</p>
+            <ul className="flex flex-col gap-3">
+              {links.Keşfet.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="text-stone/50 hover:text-gold text-sm font-light transition-colors duration-200"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Kurumsal */}
+          <div>
+            <p className="label-mono text-[9px] text-stone/30 mb-5">Kurumsal</p>
+            <ul className="flex flex-col gap-3">
+              {/* Toptan Alım accordion */}
+              <li>
+                <button
+                  onClick={() => setTopOpen(!topOpen)}
+                  className="flex items-center gap-1 text-stone/50 hover:text-gold text-sm font-light transition-colors duration-200"
+                >
+                  Toptan Alım
+                  <ChevronDown
+                    size={13}
+                    className="transition-transform duration-200"
+                    style={{ transform: topOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                  />
+                </button>
+                {topOpen && (
+                  <ul className="mt-2 ml-3 flex flex-col gap-2 border-l border-stone/10 pl-3">
+                    <li>
+                      <a
+                        href="https://bayi.oanddcoffee.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gold/70 hover:text-gold text-sm font-light transition-colors duration-200"
+                      >
+                        Bayi Girişi →
+                      </a>
+                    </li>
+                  </ul>
+                )}
+              </li>
+              {links.Kurumsal.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="text-stone/50 hover:text-gold text-sm font-light transition-colors duration-200"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Yardım */}
+          <div>
+            <p className="label-mono text-[9px] text-stone/30 mb-5">Yardım</p>
+            <ul className="flex flex-col gap-3">
+              {links.Yardım.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="text-stone/50 hover:text-gold text-sm font-light transition-colors duration-200"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         {/* Bottom bar */}
