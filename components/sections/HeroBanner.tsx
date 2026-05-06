@@ -126,9 +126,22 @@ export default function HeroBanner() {
               {slides[current].cta.text}
               <ArrowRight size={14} />
             </Link>
-            <Link href="/toptan" className="btn-outline">
-              Toptan Al
-            </Link>
+            <div className="relative group">
+              <button className="btn-outline flex items-center gap-1">
+                Toptan Alım
+                <ChevronDown size={13} className="transition-transform duration-200 group-hover:rotate-180" />
+              </button>
+              <div className="absolute left-0 top-full mt-2 min-w-[160px] bg-bg-soft border border-stone/20 rounded-lg overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-30">
+                <a
+                  href="https://bayi.oanddcoffee.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-3 text-sm text-stone/70 hover:text-gold hover:bg-stone/5 transition-colors"
+                >
+                  Bayi Girişi →
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
