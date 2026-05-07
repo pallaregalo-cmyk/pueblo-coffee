@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ShoppingBag, Menu, X, Search } from "lucide-react";
 
 const navLinks = [
@@ -49,18 +50,16 @@ export default function Navbar() {
       >
         <div className="section-padding flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <span
-              className="font-serif text-2xl font-light text-stone tracking-widest group-hover:text-gold transition-colors duration-300"
-              style={{ fontFamily: "var(--font-cormorant)" }}
-            >
-              PUEBLO
-            </span>
-            <span
-              className="label-mono text-[9px] text-stone/40 leading-tight hidden sm:block"
-            >
-              COFFEE<br />ROASTERY
-            </span>
+          <Link href="/" className="flex items-center group">
+            <Image
+              src="/images/logo.png"
+              alt="Pueblo Coffee Roastery"
+              width={400}
+              height={148}
+              unoptimized
+              className="h-10 w-auto object-contain transition-opacity duration-300 group-hover:opacity-80"
+              priority
+            />
           </Link>
 
           {/* Desktop Nav */}

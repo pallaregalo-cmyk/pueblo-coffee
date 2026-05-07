@@ -37,7 +37,6 @@ export default function HeroBanner() {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Auto-advance
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       goNext();
@@ -48,7 +47,6 @@ export default function HeroBanner() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current]);
 
-  // Play active video
   useEffect(() => {
     videoRefs.current.forEach((v, i) => {
       if (!v) return;
@@ -106,15 +104,11 @@ export default function HeroBanner() {
       <div className="relative z-20 h-full flex flex-col justify-end section-padding pb-24">
         <div
           className={`transition-all duration-600 ${
-            transitioning
-              ? "opacity-0 translate-y-4"
-              : "opacity-100 translate-y-0"
+            transitioning ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
           }`}
         >
           <span className="gold-line" />
-          <span className="label-mono block mb-4">
-            {slides[current].label}
-          </span>
+          <span className="label-mono block mb-4">{slides[current].label}</span>
           <h1 className="heading-display whitespace-pre-line mb-6 leading-none">
             {slides[current].title}
           </h1>
@@ -126,22 +120,9 @@ export default function HeroBanner() {
               {slides[current].cta.text}
               <ArrowRight size={14} />
             </Link>
-            <div className="relative group">
-              <button className="btn-outline flex items-center gap-1">
-                Toptan Alım
-                <ChevronDown size={13} className="transition-transform duration-200 group-hover:rotate-180" />
-              </button>
-              <div className="absolute left-0 top-full mt-2 min-w-[160px] bg-bg-soft border border-stone/20 rounded-lg overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-30">
-                <a
-                  href="https://bayi.oanddcoffee.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-3 text-sm text-stone/70 hover:text-gold hover:bg-stone/5 transition-colors"
-                >
-                  Bayi Girişi →
-                </a>
-              </div>
-            </div>
+            <Link href="/toptan" className="btn-outline">
+              Toptan Alım
+            </Link>
           </div>
         </div>
 
@@ -153,9 +134,7 @@ export default function HeroBanner() {
               onClick={() => goTo(i)}
               aria-label={`Slayt ${i + 1}`}
               className={`transition-all duration-300 ${
-                i === current
-                  ? "w-8 h-px bg-gold"
-                  : "w-4 h-px bg-stone/30 hover:bg-stone/60"
+                i === current ? "w-8 h-px bg-gold" : "w-4 h-px bg-stone/30 hover:bg-stone/60"
               }`}
             />
           ))}
